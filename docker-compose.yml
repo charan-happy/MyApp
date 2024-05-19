@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  go-app:
+    image: charan63/go-app
+    ports:
+      -"8080:8080"
+
+  nextjs-app:
+    image: charan63/nextjs-app
+    ports:
+      - "3000:3000"
+
+  wordpress-app:
+    image: charan63/wordpress-app
+    ports:
+      - "80:80"
