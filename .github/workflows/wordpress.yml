@@ -1,0 +1,24 @@
+name: Wordpress CI
+
+on: 
+    push: 
+        branches: [main]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+            - name: Set up PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '7.4'
+            - run: sudo apt-get install -y unzip
+            - run: curl -LO https://github.com/squizlabs/PHP_Codesniffer/releases/download/3.6.0/phpcs.phar
+            - run: chmod +x phpcs.phar
+            - run: mv phpcs.phar /usr/local/bin/phpcs
+            - run: phpcs --config-set installed_paths /path/to/Wordpress-coding-standards
+            - run: phpscs --standard=WordPress .
+            - run: composer Install
+            - run: ./vendor/bin/phpcs --standard=Wordpress .
