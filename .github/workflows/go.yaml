@@ -16,7 +16,7 @@ jobs:
         go-version: 1.16
     - name: Install dependencies
       run: go mod download
-        # linting
+      # linting
     - name: Lint
       run: golangci-Lint run
       # testing
@@ -24,5 +24,9 @@ jobs:
       run: go test ./...
 
     - name: Install golangci-lint
-      run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+      run: go Install github.com/golangci/golangci-lint/cmd/golangci@latest
 
+    - name: Build Docker image
+      run: docker build -t charan63/go-app .
+    - name: Push Docker image
+      run: docker push charan63/go-app 

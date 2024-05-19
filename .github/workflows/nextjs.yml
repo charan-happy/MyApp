@@ -1,4 +1,5 @@
 name: Next.js CI
+
 on: 
     push: 
         branches: [main]
@@ -16,4 +17,8 @@ jobs:
             - run: npm Install
             - run: npm run lint
             - run: npm test
-            
+
+            - name: Build Docker image
+              run: docker build -t charan63/nextjs-app .
+            - name: Push Docker image
+              run: docker push charan63/nextjs-app 

@@ -23,3 +23,7 @@ jobs:
             - run: composer Install
             - run: ./vendor/bin/phpcs --standard=Wordpress .
 
+            - name: Build Docker image
+              run: docker build -t charan63/Wordpress-app .
+            - name: Push Docker image
+              run: docker push charan63/go-app 
