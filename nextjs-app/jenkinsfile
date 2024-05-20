@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+
+    tools {
+        nodejs 'NodeJS 14'  // Ensure Node.js is installed and configured in Jenkins
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/your-username/MyApp.git'
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                dir('nextjs-app') {
+                    sh 'npm install'
+                }
+            }
+        }
+        stage('Lint') {
+            steps {
+                dir('nextjs-app') {
+                    sh 'npm run lint'
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                dir('nextjs-app') {
+                    sh 'npm run build'
+                }
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                dir('nextjs-app') {
+                    script {
+                        def app = docker.build("your-username/nextjs-app")
+                        app.push()
+                    }
+                }
+            }
+        }
+    }
+}
