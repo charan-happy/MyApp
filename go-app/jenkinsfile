@@ -37,8 +37,10 @@ pipeline {
             steps {
                 dir('go-app') {
                     script {
+                        docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials-id'){
                         def app = docker.build("your-username/go-app")
                         app.push()
+                    }
                     }
                 }
             }
