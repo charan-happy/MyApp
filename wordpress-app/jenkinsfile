@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-username/MyApp.git'
+                git 'https://github.com/charan-happy/MyApp.git'
             }
         }
         stage('Install PHPCS') {
@@ -31,7 +31,7 @@ pipeline {
                 dir('wordpress-app') {
                     script {
                         docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials-id'){
-                        def app = docker.build("your-username/wordpress-app")
+                        def app = docker.build("charan63/wordpress-app")
                         app.push()
                     }
                     }
