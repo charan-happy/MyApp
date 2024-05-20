@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    tools {
+        go 'Go 1.16'  // Ensure Go is installed and configured in Jenkins
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/your-username/MyApp.git'
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                dir('go-app') {
+                    sh 'go mod download'
+                }
+            }
+        }
+        stage('Lint') {
+            steps {
+                dir('go-app') {
+                    sh 'go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest'
+                    sh 'golangci-lint run'
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                dir('go-app') {
+                    sh 'go test ./...'
+                }
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                dir('go-app') {
+                    script {
+                        def app = docker.build("your-username/go-app")
+                        app.push()
+                    }
+                }
+            }
+        }
+    }
+}
