@@ -27,6 +27,6 @@ jobs:
       run: go Install github.com/golangci/golangci-lint/cmd/golangci@latest
 
     - name: Build Docker image
-      run: docker build -t charan63/go-app .
+      run: docker build -t ${ secrets.DOCKERHUB_USERNAME }/go-app .
     - name: Push Docker image
-      run: docker push charan63/go-app 
+      run: docker push ${ secrets.DOCKERHUB_USERNAME }/go-app 
