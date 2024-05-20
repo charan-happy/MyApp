@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    tools {
+        php 'PHP 7.4'  // Ensure PHP is installed and configured in Jenkins
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/your-username/MyApp.git'
+            }
+        }
+        stage('Install PHPCS') {
+            steps {
+                dir('wordpress-app') {
+                    sh 'composer require --dev squizlabs/php_codesniffer'
+                }
+            }
+        }
+        stage('Lint') {
+            steps {
+                dir('wordpress-app') {
+                    sh './vendor/bin/phpcs --config-set installed_paths /path/to/wordpress-coding-standards'
+                    sh './vendor/bin/phpcs --standard=WordPress .'
+                }
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                dir('wordpress-app') {
+                    script {
+                        def app = docker.build("your-username/wordpress-app")
+                        app.push()
+                    }
+                }
+            }
+        }
+    }
+}
