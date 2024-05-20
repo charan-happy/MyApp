@@ -19,6 +19,6 @@ jobs:
             - run: npm test
 
             - name: Build Docker image
-              run: docker build -t charan63/nextjs-app .
+              run: docker build -t ${ secrets.DOCKERHUB_USERNAME }/nextjs-app .
             - name: Push Docker image
-              run: docker push charan63/nextjs-app 
+              run: docker push ${ secrets.DOCKERHUB_USERNAME }/nextjs-app 
