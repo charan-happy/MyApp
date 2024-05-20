@@ -3,6 +3,8 @@ name: WordPress CI
 on:
   push:
     branches: [main]
+    paths-ignore: 
+      - '**/*.md'
 
 jobs:
   build:
