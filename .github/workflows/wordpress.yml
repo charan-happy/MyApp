@@ -22,7 +22,7 @@ jobs:
             - run: echo $PATH
             - run: phpcs --version
             - run: phpcs --config-set installed_paths /path/to/Wordpress-coding-standards
-            - run: phpscs --standard=WordPress .
+            # - run: phpscs --standard=WordPress .
             - run: composer Install
             - run: ./vendor/bin/phpcs --standard=Wordpress .
 
