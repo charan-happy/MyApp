@@ -30,8 +30,10 @@ pipeline {
             steps {
                 dir('wordpress-app') {
                     script {
+                        docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials-id'){
                         def app = docker.build("your-username/wordpress-app")
                         app.push()
+                    }
                     }
                 }
             }
