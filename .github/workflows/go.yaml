@@ -3,10 +3,13 @@ name: Go CI
 on:
   push:
     branches: [main]
+    paths-ignore: 
+      - '**/*.md'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    
 
     steps:
     - uses: actions/checkout@v2
