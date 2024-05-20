@@ -15,7 +15,7 @@ jobs:
       with:
         go-version: 1.16
     - name: Install dependencies 
-      run: go mod init .
+      run: go mod init 
     - name: Run Linter
       run: golangci-lint run
     - name: Test
