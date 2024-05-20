@@ -7,31 +7,31 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-  
+
     steps:
     - uses: actions/checkout@v2
-    - name: setup Go
+    - name: Set up Go
       uses: actions/setup-go@v2
       with:
         go-version: 1.16
     - name: Install dependencies
-      run: go mod download go-app
+      run: go mod download
+    - name: Run Linter
+      run: golangci-lint run
+    - name: Test
+      run: go test ./...
+    - name: Install golangci-lint
+      run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+    
     - name: Dockerhub Login
       uses: docker/login-action@v2.2.0
       with:
         username: ${{ vars.Dockerhub_USERNAME }}
         password: ${{ secrets.Dockerhub_PASSWORD }}
-      # linting
-    - name: Lint
-      run: golangci-Lint run
-      # testing
-    - name: Test
-      run: go test ./...
-
-    - name: Install golangci-lint
-      run: go Install github.com/golangci/golangci-lint/cmd/golangci@latest
 
     - name: Build Docker image
-      run: docker build -t ${ vars.Dockerhub_USERNAME }/go-app .
+      run: docker build -t ${{ vars.Dockerhub_USERNAME }}/go-app .
     - name: Push Docker image
-      run: docker push ${ vars.Dockerhub_USERNAME }/go-app 
+      run: docker push ${{ vars.Dockerhub_USERNAME }}/go-app
+    
+    
