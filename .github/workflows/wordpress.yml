@@ -21,6 +21,9 @@ jobs:
             - run: phpcs --config-set installed_paths /path/to/Wordpress-coding-standards
             - run: phpscs --standard=WordPress .
             - run: composer Install
+            - run: composer global require "squizlabs/php_codesniffer=*"
+            - run: echo $PATH
+            - run: phpcs --version
             - run: ./vendor/bin/phpcs --standard=Wordpress .
 
             - name: Build Docker image
