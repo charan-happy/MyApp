@@ -36,8 +36,10 @@ pipeline {
             steps {
                 dir('nextjs-app') {
                     script {
+                        docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials-id'){
                         def app = docker.build("your-username/nextjs-app")
                         app.push()
+                    }
                     }
                 }
             }
