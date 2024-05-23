@@ -23,10 +23,11 @@ jobs:
     - run: chmod +x phpcs.phar
     - run: mv phpcs.phar /usr/local/bin/phpcs
     - run: phpcs --config-set installed_paths /path/to/wordpress-coding-standards
+    - run: phpcs --standard=WordPress ./wordpress-app
     - run: composer install
     - run: ./vendor/bin/phpcs --standard=WordPress ./wordpress-app
     - run: composer require --dev squizlabs/php_codesniffer ; vendor/bin/phpcs --config-set installed_paths /path/to/wordpress-coding-standards
-    - run: phpcs --standard=WordPress .
+    
     
     - name: Dockerhub Login
       uses: docker/login-action@v2.2.0
