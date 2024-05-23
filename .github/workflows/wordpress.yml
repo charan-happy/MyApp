@@ -36,5 +36,5 @@ jobs:
     - name: Build Docker image
       run: docker build -t ${{ vars.DOCKERHUB_USERNAME }}/wordpress-app ./wordpress-app
     - name: Push Docker image
-      run: docker push ${{ vars.DOCKERHUB_USERNAME }}/wordpress-app ./wordpress-app
+      run: docker push ${{ vars.DOCKERHUB_USERNAME }}/wordpress-app
     
