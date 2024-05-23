@@ -1,6 +1,8 @@
 name: Next.js CI
 
 on:
+  workflow_dispatch:
+  
   push:
     branches: [main]
     paths-ignore: 
@@ -16,10 +18,10 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '18.x'
-    - run: npm install
-    - run: npm run lint
-    - run: npm test
-    - run: npm install eslint prettier eslint-config-prettier eslint-plugin-prettier --save-dev
+    - run: cd nextjs-app && npm install
+    - run: cd nextjs-app && npm run lint
+    - run: cd nextjs-app && npm test
+    - run: cd nextjs-app && npm install eslint prettier eslint-config-prettier eslint-plugin-prettier --save-dev
 
     - name: Dockerhub Login
       uses: docker/login-action@v2.2.0
