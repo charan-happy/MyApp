@@ -38,7 +38,7 @@ jobs:
       run: cd go-app && go test ./...
 
     - name: running tidy
-      run: go mod tidy
+      run: go mod init https://github.com/charan-happy/MyApp/go-app
 
     - name: Install golangci-lint
       run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
