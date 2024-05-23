@@ -49,11 +49,11 @@ jobs:
     - name: Dockerhub Login
       uses: docker/login-action@v2.2.0
       with:
-        username: ${{ secrets.Dockerhub_USERNAME }}
+        username: ${{ vars.Dockerhub_USERNAME }}
         password: ${{ secrets.Dockerhub_PASSWORD }}
 
     - name: Build Docker image
-      run: docker build -t ${{ secrets.Dockerhub_USERNAME }}/go-app .
+      run: docker build -t ${{ vars.Dockerhub_USERNAME }}/go-app .
 
     - name: Push Docker image
-      run: docker push ${{ secrets.Dockerhub_USERNAME }}/go-app
+      run: docker push ${{ vars.Dockerhub_USERNAME }}/go-app
