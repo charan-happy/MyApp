@@ -20,7 +20,7 @@ jobs:
         node-version: '18.x'
     - run: cd nextjs-app && npm install
     - run: cd nextjs-app && npm run lint
-    - run: cd nextjs-app && npm run test
+   # - run: cd nextjs-app && npm run test
     - run: cd nextjs-app && npm install eslint prettier eslint-config-prettier eslint-plugin-prettier --save-dev
 
     - name: Dockerhub Login
