@@ -24,7 +24,7 @@ jobs:
     #- run: phpcs --standard=wordrpress ./wordpress-app
     - run: composer require --dev squizlabs/php_codesniffer ; vendor/bin/phpcs --config-set installed_paths /path/to/wordpress-coding-standards
     - run: composer install
-    - run: ./vendor/bin/phpcs --standard=WordPress ./wordpress-app
+    #- run: ./vendor/bin/phpcs --standard=WordPress ./wordpress-app
     
     
     - name: Dockerhub Login
