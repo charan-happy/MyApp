@@ -29,13 +29,13 @@ jobs:
           ${{ runner.os }}-go-
 
     - name: Install dependencies
-      run: go mod download
+      run: cd go-app && go mod download
 
     - name: Build
-      run: go build -v ./...
+      run: cd go-app && go build -v ./...
 
     - name: Test
-      run: go test ./...
+      run: cd go-app && go test ./...
 
     - name: Install golangci-lint
       run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
