@@ -1,6 +1,8 @@
 name: WordPress CI
 
 on:
+  workflow_dispatch:
+  
   push:
     branches: [main]
     paths-ignore: 
@@ -21,19 +23,19 @@ jobs:
     - run: chmod +x phpcs.phar
     - run: mv phpcs.phar /usr/local/bin/phpcs
     - run: phpcs --config-set installed_paths /path/to/wordpress-coding-standards
-    - run: phpcs --standard=WordPress .
     - run: composer install
     - run: ./vendor/bin/phpcs --standard=WordPress .
     - run: composer require --dev squizlabs/php_codesniffer ; vendor/bin/phpcs --config-set installed_paths /path/to/wordpress-coding-standards
-
+    - run: phpcs --standard=WordPress .
+    
     - name: Dockerhub Login
       uses: docker/login-action@v2.2.0
       with:
-        username: ${{ vars.Dockerhub_USERNAME }}
-        password: ${{ secrets.Dockerhub_PASSWORD }}
+        username: ${{ vars.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
     - name: Build Docker image
-      run: docker build -t ${{ vars.Dockerhub_USERNAME }}/go-app .
+      run: docker build -t ${{ vars.DOCKERHUB_USERNAME }}/nextjs-app ./nextjs-app
     - name: Push Docker image
-      run: docker push ${{ vars.Dockerhub_USERNAME }}/go-app
+      run: docker push ${{ vars.DOCKERHUB_USERNAME }}/nextjs-app ./nextjs-app
     
