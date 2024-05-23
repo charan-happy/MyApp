@@ -40,8 +40,8 @@ jobs:
     - name: running tidy
       run: go mod init github.com/charan-happy/MyApp/go-app
 
-    - name: Install golangci-lint
-      run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+    # - name: Install golangci-lint
+     # run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 
     - name: Run Linter
       run: golangci-lint run
