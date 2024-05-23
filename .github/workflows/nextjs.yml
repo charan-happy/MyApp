@@ -18,9 +18,21 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '18.x'
-    - run: cd nextjs-app && npm install
-    - run: cd nextjs-app && npm run lint
-   # - run: cd nextjs-app && npm run test
+    - name: Cache node modules
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.npm
+          node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+    - name: install dependencies
+      run: cd nextjs-app && npm install
+    - name: linter
+      run: cd nextjs-app && npm run lint
+    - name: test
+      run: cd nextjs-app && npm test
     - run: cd nextjs-app && npm install eslint prettier eslint-config-prettier eslint-plugin-prettier --save-dev
 
     - name: Dockerhub Login
