@@ -55,7 +55,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
     - name: Build Docker image
-      run: docker build -t ${{ vars.DOCKERHUB_USERNAME }}/go-app .
+      run: docker build -t ${{ vars.DOCKERHUB_USERNAME }}/go-app ./go-app
 
     - name: Push Docker image
       run: docker push ${{ vars.DOCKERHUB_USERNAME }}/go-app
