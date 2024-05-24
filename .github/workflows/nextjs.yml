@@ -34,7 +34,7 @@ jobs:
       run: npm run lint
       working-directory: ./nextjs-app
     - name: test
-      run: npm test
+      run: npm run test
       working-directory: ./nextjs-app
     - run: cd nextjs-app && npm install eslint prettier eslint-config-prettier eslint-plugin-prettier --save-dev
 
