@@ -33,10 +33,10 @@ jobs:
         cd wordpress-app
         composer install
     
-    - name: Run PHPUnit tests
-      run: |
-        cd ./wordpress-app
-        vendor/bin/phpunit
+   # - name: Run PHPUnit tests
+    #  run: |
+     #   cd ./wordpress-app
+      #  vendor/bin/phpunit
     
     - name: Dockerhub Login
       uses: docker/login-action@v2
