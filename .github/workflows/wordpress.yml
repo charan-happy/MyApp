@@ -21,7 +21,7 @@ jobs:
     - name: Install dependencies
       run: cd wordpress-app && composer install
     - name: Test
-      run: cd wordpress-app && phpunit
+      run: phpunit
     - name: Dockerhub Login
       uses: docker/login-action@v2
       with:
