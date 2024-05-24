@@ -35,7 +35,7 @@ jobs:
     
     - name: Run PHPUnit tests
       run: |
-        cd wordpress-app
+        cd ./wordpress-app
         vendor/bin/phpunit
     
     - name: Dockerhub Login
