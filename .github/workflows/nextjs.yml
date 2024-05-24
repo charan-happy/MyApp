@@ -28,11 +28,14 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-
     - name: install dependencies
-      run: cd nextjs-app && npm install
+      run: npm install
+      working-directory: ./nextjs-app
     - name: linter
-      run: cd nextjs-app && npm run lint
+      run: npm run lint
+      working-directory: ./nextjs-app
     - name: test
       run: npm test
+      working-directory: ./nextjs-app
     - run: cd nextjs-app && npm install eslint prettier eslint-config-prettier eslint-plugin-prettier --save-dev
 
     - name: Dockerhub Login
