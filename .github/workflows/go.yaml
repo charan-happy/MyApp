@@ -46,6 +46,9 @@ jobs:
 
     - name: Install golangci-lint
       run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+      env:
+        GOBIN: /go/bin
+        PATH: /go/bin:${{ env.PATH }}
       working-directory: ./go-app
 
     - name: Run Linter
