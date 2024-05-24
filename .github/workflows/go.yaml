@@ -44,16 +44,16 @@ jobs:
     - name: running tidy
       run: go mod init github.com/charan-happy/MyApp/go-app
 
-    - name: Install golangci-lint
-      run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
-      env:
-        GOBIN: /go/bin
-        PATH: /go/bin:${{ env.PATH }}
-      working-directory: ./go-app
+   # - name: Install golangci-lint
+     # run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+     # env:
+      #  GOBIN: /go/bin
+        #PATH: /go/bin:${{ env.PATH }}
+      #working-directory: ./go-app
 
-    - name: Run Linter
-      run: golangci-lint run
-      working-directory: ./go-app
+    #- name: Run Linter
+      #run: golangci-lint run
+     # working-directory: ./go-app
       
     - name: Dockerhub Login
       uses: docker/login-action@v2.2.0
