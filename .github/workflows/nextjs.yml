@@ -14,10 +14,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '18.x'
+    
     - name: Cache node modules
       uses: actions/cache@v2
       with:
@@ -27,27 +29,31 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - name: install dependencies
+    
+    - name: Install dependencies
       run: npm install
       working-directory: ./nextjs-app
-    - name: linter
+    
+    - name: Install Eslint and Prettier
+      run: npm install eslint prettier eslint-config-prettier eslint-plugin-prettier --save-dev
+      working-directory: ./nextjs-app
+    
+    - name: Run linter
       run: npm run lint
       working-directory: ./nextjs-app
-    - name: seeing packages
-      run: npm run
-      working-directory: ./nextjs-app
-    - name: test
+    
+    - name: Run tests
       run: npm run test
       working-directory: ./nextjs-app
-    - run: cd nextjs-app && npm install eslint prettier eslint-config-prettier eslint-plugin-prettier --save-dev
-
+    
     - name: Dockerhub Login
       uses: docker/login-action@v2.2.0
       with:
         username: ${{ vars.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
+    
     - name: Build Docker image
       run: docker build -t ${{ vars.DOCKERHUB_USERNAME }}/nextjs-app ./nextjs-app
+    
     - name: Push Docker image
       run: docker push ${{ vars.DOCKERHUB_USERNAME }}/nextjs-app
