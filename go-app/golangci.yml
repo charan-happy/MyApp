@@ -11,3 +11,4 @@ linters:
     - govet
     - errcheck
     - staticcheck
+    - slices
