@@ -5,6 +5,8 @@ on:
   
   push:
     branches: [main]
+    paths-ignore:
+      - '**/*.md'
 
 jobs:
   build:
@@ -16,25 +18,16 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: '7.4'
-    - run: sudo apt-get install -y unzip
-    - run: curl -LO https://github.com/squizlabs/PHP_CodeSniffer/releases/download/3.6.0/phpcs.phar
-    - run: chmod +x phpcs.phar
-    - run: mv phpcs.phar /usr/local/bin/phpcs
-    - run: phpcs --config-set installed_paths /path/to/wordpress-coding-standards
-    #- run: phpcs --standard=wordrpress ./wordpress-app
-    - run: composer require --dev squizlabs/php_codesniffer ; vendor/bin/phpcs --config-set installed_paths /path/to/wordpress-coding-standards
-    - run: composer install
-    #- run: ./vendor/bin/phpcs --standard=WordPress ./wordpress-app
-    
-    
+    - name: Install dependencies
+      run: cd wordpress-app && composer install
+    - name: Test
+      run: cd wordpress-app && phpunit
     - name: Dockerhub Login
-      uses: docker/login-action@v2.2.0
+      uses: docker/login-action@v2
       with:
         username: ${{ vars.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
     - name: Build Docker image
       run: docker build -t ${{ vars.DOCKERHUB_USERNAME }}/wordpress-app ./wordpress-app
     - name: Push Docker image
       run: docker push ${{ vars.DOCKERHUB_USERNAME }}/wordpress-app
-    
