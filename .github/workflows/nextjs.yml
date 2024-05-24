@@ -32,7 +32,7 @@ jobs:
     - name: linter
       run: cd nextjs-app && npm run lint
     - name: test
-      run: cd nextjs-app && npm test
+      run: npm test
     - run: cd nextjs-app && npm install eslint prettier eslint-config-prettier eslint-plugin-prettier --save-dev
 
     - name: Dockerhub Login
